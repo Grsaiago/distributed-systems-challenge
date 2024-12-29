@@ -36,7 +36,7 @@ unique-id:
 	@go run ./cmd/unique-id/unique-id.go
 
 # Build all binaries into the ./solutions folder
-build: build/echo build/unique-id build/broadcast-a
+build: build/echo build/unique-id build/broadcast-a build/broadcast-c
 
 # Build the echo binary into the ./solutions folder
 .PHONY: build/echo
@@ -52,3 +52,8 @@ build/unique-id:
 .PHONY: build/broadcast-a
 build/broadcast-a:
 	@go build -o $(OUT_DIR) ./cmd/broadcast-a/broadcast-a.go
+
+# Build the broadcast-a binary into the ./solutions folder
+.PHONY: build/broadcast-c
+build/broadcast-c:
+	@go build -o $(OUT_DIR) ./cmd/broadcast-c/broadcast-c.go
