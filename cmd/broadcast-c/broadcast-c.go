@@ -109,17 +109,8 @@ func main() {
 	nodeMessageSet := NewMessageSet()
 
 	// this will be initialized by the 'topology' rpc
-	var nodeTopology []string
 
 	node.Handle("topology", func(msg maelstrom.Message) error {
-		var body TopologyRequest
-
-		json.Unmarshal(msg.Body, &body)
-
-		// we get our neighbour nodes and copy them over as our node's topology
-		neighbourNodes, _ := body.Topology[node.ID()]
-		nodeTopology = neighbourNodes
-
 		response := TopologyResponse{
 			Type: "topology_ok",
 		}
@@ -140,7 +131,7 @@ func main() {
 		// I gotta improve this
 		// if there are still some nodes to get this message, broadcast it further
 		if len(body.AckNodes) <= len(node.NodeIDs()) {
-			for _, val := range nodeTopology {
+			for _, val := range node.NodeIDs() {
 				if slices.Index(body.AckNodes, val) == -1 {
 					go node.Send(val, body)
 				}
