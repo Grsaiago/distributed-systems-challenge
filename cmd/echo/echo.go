@@ -7,6 +7,7 @@ import (
 	maelstrom "github.com/jepsen-io/maelstrom/demo/go"
 )
 
+// entrypoint for the application
 func main() {
 	node := maelstrom.NewNode()
 
